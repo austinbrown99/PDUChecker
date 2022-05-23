@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="PDU_Checker:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/PDU_Checker_jar</output-path>
+    <root id="archive" name="PDU_Checker.jar">
+      <element id="module-output" name="PDU_Checker" />
+    </root>
+  </artifact>
+</component>
