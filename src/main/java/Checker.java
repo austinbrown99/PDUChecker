@@ -16,6 +16,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+//TODO
+// -Get Icon to build in JAR
+// -Option to use old method of checking
+// -Pull ini from the device
+// -Add check for excel file
+// -Output to excel
+
 public class Checker {
     private static File selectedFolder;
     private static File selectedExcel;
@@ -34,7 +41,7 @@ public class Checker {
         JPanel panel = new JPanel();
         panel.setLayout(null);
 
-        ImageIcon img = new ImageIcon("src/icon.png");
+        ImageIcon img = new ImageIcon("src/main/java/icon.png");
         frame.setIconImage(img.getImage());
 
         //Create objects in window
@@ -60,6 +67,7 @@ public class Checker {
             }
         });
 
+        //Select Excel File
         selectExcel.addActionListener(e -> {
             JFileChooser fileChooser = new JFileChooser();
             fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
@@ -100,8 +108,6 @@ public class Checker {
             resultPanel.setLayout(null);
             resultFrame.setContentPane(resultPanel);
             resultFrame.setVisible(false);
-
-            resultFrame.setIconImage(img.getImage());
 
             //Create label full of errors and display the window
             JList<String> displayList = new JList<>(problems.toArray(new String[0]));
@@ -189,6 +195,10 @@ public class Checker {
         frame.setVisible(true);
     }
 
+    /**
+     * @param selectedFolder The folder containing ini files
+     * @param selectedExcel  The configuration excel file
+     */
     public static void runChecker(File selectedFolder, File selectedExcel) throws IOException, InvalidFormatException {
         XSSFWorkbook workbook = new XSSFWorkbook(selectedExcel);
         XSSFSheet sheet = workbook.getSheetAt(0);
@@ -358,6 +368,10 @@ public class Checker {
         }
     }
 
+    /**
+     * @param olname The name of the outlet in the Excel document
+     * @return returns what the olDelay config should be
+     */
     public static String delayTranslate(String olname) {
         if (olname.equalsIgnoreCase("shutdown") || olname.equalsIgnoreCase("unused") || olname.equalsIgnoreCase("")) {
             return "-1";
