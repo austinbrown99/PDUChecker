@@ -5,6 +5,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.ini4j.Ini;
 
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
@@ -20,7 +21,6 @@ import java.util.Map;
 // -Get Icon to build in JAR
 // -Option to use old method of checking
 // -Pull ini from the device
-// -Add check for excel file
 // -Output to excel
 
 public class Checker {
@@ -35,7 +35,7 @@ public class Checker {
 
     public static void window() {
         //Create Window
-        JFrame frame = new JFrame("PDU Checker V3.1");
+        JFrame frame = new JFrame("PDU Checker V3.15");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(500, 200);
         JPanel panel = new JPanel();
@@ -70,6 +70,8 @@ public class Checker {
         //Select Excel File
         selectExcel.addActionListener(e -> {
             JFileChooser fileChooser = new JFileChooser();
+            FileNameExtensionFilter filter = new FileNameExtensionFilter("EXCEL FILES", "xlsx", "excel");
+            fileChooser.setFileFilter(filter);
             fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
             fileChooser.setCurrentDirectory(new File(System.getProperty("user.home") + System.getProperty("file.separator") + "Desktop"));
             int option = fileChooser.showOpenDialog(frame);
