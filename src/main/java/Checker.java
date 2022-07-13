@@ -22,6 +22,7 @@ import java.util.Map;
 // -Option to use old method of checking
 // -Pull ini from the device
 // -Output to excel
+// --Button Created in Results Window
 
 public class Checker {
     private static File selectedFolder;
@@ -35,7 +36,7 @@ public class Checker {
 
     public static void window() {
         //Create Window
-        JFrame frame = new JFrame("PDU Checker V3.15");
+        JFrame frame = new JFrame("PDU Checker V3.16");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(500, 200);
         JPanel panel = new JPanel();
@@ -128,20 +129,20 @@ public class Checker {
             //Total Scanned Label
             JLabel totalLabel = new JLabel();
             totalLabel.setText(totalFiles + " files scanned");
-            totalLabel.setBounds(200, 220, 150, 37);
+            totalLabel.setBounds(150, 220, 150, 37);
             totalLabel.setVerticalAlignment(SwingConstants.CENTER);
             totalLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
             //Total Problems
             JLabel totalProblems = new JLabel();
             totalProblems.setText(problems.size() + " oopsies");
-            totalProblems.setBounds(200, 257, 150, 37);
+            totalProblems.setBounds(150, 257, 150, 37);
             totalProblems.setVerticalAlignment(SwingConstants.CENTER);
             totalProblems.setHorizontalAlignment(SwingConstants.CENTER);
 
             //Create File Button
-            JButton createFile = new JButton("Create \n File");
-            createFile.setBounds(400, 220, 150, 75);
+            JButton createFile = new JButton("Create Text File");
+            createFile.setBounds(300, 220, 125, 75);
             createFile.addActionListener(e1 -> {
                 File resultFile = new File(selectedFolder + "\\result.txt");
                 try {
@@ -169,7 +170,7 @@ public class Checker {
                 problemCopyString.append("\n").append(i);
             }
             JButton copyButton = new JButton("Copy");
-            copyButton.setBounds(560, 220, 150, 75);
+            copyButton.setBounds(430, 220, 125, 75);
             String finalProblemCopyString = problemCopyString.toString();
             copyButton.addActionListener(e1 -> {
                 StringSelection stringSelection = new StringSelection(finalProblemCopyString);
@@ -177,9 +178,15 @@ public class Checker {
                 clipboard.setContents(stringSelection, null);
             });
 
+            //Create Excel File Button
+            JButton createExcelFile = new JButton("Create Excel File");
+            createExcelFile.setBounds(560, 220, 140, 75);
+            createExcelFile.addActionListener(e1 -> createExcelFile());
+
             //Add files to the frame
             resultFrame.getContentPane().add(createFile);
             resultFrame.getContentPane().add(copyButton);
+            resultFrame.getContentPane().add(createExcelFile);
             resultFrame.getContentPane().add(totalProblems);
             resultFrame.getContentPane().add(totalLabel);
             resultFrame.getContentPane().add(resultsClose);
@@ -380,5 +387,9 @@ public class Checker {
         } else {
             return "0";
         }
+    }
+
+    public static void createExcelFile() {
+        System.out.println("Help me");
     }
 }
